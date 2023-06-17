@@ -1,5 +1,4 @@
 name: CI
-
 on:
   push:
     branches:
@@ -10,17 +9,13 @@ jobs:
   main:
     runs-on: ubuntu-latest
     env:
-      PREVIOUS_COMMIT_SHA: ${{ github.event.before }}
-
+      NX_BASE=origin/master~1
+      NX_HEAD=origin/master
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-
       - uses: nrwl/nx-set-shas@v3
-        with:
-          sha: ${{ env.PREVIOUS_COMMIT_SHA }}
-
       - run: npm ci
 
       - run: npx nx format:check

@@ -9,10 +9,6 @@ on:
 jobs:
   main:
     runs-on: ubuntu-latest
-    env:
-      NX_BASE: origin/master~1
-      NX_HEAD: origin/master
-
     steps:
       - uses: actions/checkout@v2
         with:
@@ -20,11 +16,9 @@ jobs:
 
       - uses: nrwl/nx-set-shas@v3
         with:
-          sha: ${{ env.NX_BASE }}
-          headSha: ${{ env.NX_HEAD }}
+          main-branch-name: master
 
       - run: npm ci
-
       - run: npx nx format:check
       - run: npx nx affected -t lint --parallel=3
       - run: npx nx affected -t test --parallel=3 --configuration=ci

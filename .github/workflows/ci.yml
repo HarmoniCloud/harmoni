@@ -1,4 +1,5 @@
 name: CI
+
 on:
   push:
     branches:
@@ -11,18 +12,17 @@ jobs:
     env:
       NX_BASE: origin/master~1
       NX_HEAD: origin/master
+
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
 
-      - name: Derive appropriate SHAs for base and head for `nx affected` commands
-        uses: nrwl/nx-set-shas@v3
-      - run: |
-          echo "BASE: ${{ env.NX_BASE }}"
-          echo "HEAD: ${{ env.NX_HEAD }}"
-
       - uses: nrwl/nx-set-shas@v3
+        with:
+          sha: ${{ env.NX_BASE }}
+          headSha: ${{ env.NX_HEAD }}
+
       - run: npm ci
 
       - run: npx nx format:check

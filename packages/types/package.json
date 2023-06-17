@@ -1,5 +1,5 @@
 {
-  "name": "@./types",
+  "name": "@harmoni/types",
   "version": "0.0.1",
   "type": "commonjs"
 }

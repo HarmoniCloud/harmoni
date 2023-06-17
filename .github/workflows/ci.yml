@@ -9,13 +9,13 @@ on:
 jobs:
   main:
     runs-on: ubuntu-latest
+    env:
+      PREVIOUS_COMMIT_SHA: ${{ github.event.before }}
+
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-
-      - name: Get previous commit SHA
-        run: echo "::set-env name=PREVIOUS_COMMIT_SHA::$(git rev-parse HEAD^)"
 
       - uses: nrwl/nx-set-shas@v3
         with:

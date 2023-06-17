@@ -9,8 +9,8 @@ jobs:
   main:
     runs-on: ubuntu-latest
     env:
-      NX_BASE=origin/master~1
-      NX_HEAD=origin/master
+      NX_BASE: origin/master~1
+      NX_HEAD: origin/master
     steps:
       - uses: actions/checkout@v2
         with:

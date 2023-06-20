@@ -1,5 +1,10 @@
 {
   "name": "@harmoni/sdk",
   "version": "0.0.1",
-  "type": "commonjs"
+  "type": "commonjs",
+  "dependencies": {
+    "@azure/arm-resources": "^5.2.0",
+    "@azure/arm-subscriptions": "^5.1.0",
+    "@azure/identity": "^3.2.2"
+  }
 }

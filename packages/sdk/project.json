@@ -4,6 +4,12 @@
   "sourceRoot": "packages/sdk/src",
   "projectType": "library",
   "targets": {
+    "prebuild": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "prebuild"
+      }
+    },
     "build": {
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],

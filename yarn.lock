@@ -61,6 +61,19 @@
   dependencies:
     tslib "^2.2.0"
 
+"@azure/arm-compute@^21.0.0":
+  version "21.0.0"
+  resolved "https://registry.yarnpkg.com/@azure/arm-compute/-/arm-compute-21.0.0.tgz#e96bf7099edef77f2b50d4f896c36c6c1528b9c2"
+  integrity sha512-9MrL6UW2oKtjLjXMdoAC5Z9vEDZ/liFz9EzR6c+UjbN+wqcaBsf4KERHV6+MWhXrNp3OnpYkeQyYxc0LAv+/nw==
+  dependencies:
+    "@azure/abort-controller" "^1.0.0"
+    "@azure/core-auth" "^1.3.0"
+    "@azure/core-client" "^1.7.0"
+    "@azure/core-lro" "^2.5.0"
+    "@azure/core-paging" "^1.2.0"
+    "@azure/core-rest-pipeline" "^1.8.0"
+    tslib "^2.2.0"
+
 "@azure/arm-resources@^5.2.0":
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/@azure/arm-resources/-/arm-resources-5.2.0.tgz#c62042976de923e0048042511cec24cceb998a09"

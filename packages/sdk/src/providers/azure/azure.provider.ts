@@ -1,8 +1,8 @@
 import { Provider } from '../provider';
 import { Provider as ProviderEnum } from '@harmoni/types';
 import { ClientSecretCredential, ClientSecretCredentialOptions } from '@azure/identity';
-import { ResourceManagementClient } from '@azure/arm-resources';
 import { logger } from '@harmoni/logger';
+import { ComputeManagementClient } from '@azure/arm-compute';
 
 export class AzureProvider extends Provider {
   private readonly credential: ClientSecretCredential;
@@ -15,17 +15,15 @@ export class AzureProvider extends Provider {
   }
 
   async getResources(subscriptionId: string) {
-    try {
-      const client = new ResourceManagementClient(this.credential, subscriptionId);
-      const resArray = [];
-      for await (const item of client.providers.list()) {
-        resArray.push(item);
-      }
-      return resArray;
-    } catch (err: any) {
-      logger.error(err);
-      return [];
+    logger.info(`Getting resources for subscription ${subscriptionId}`);
+    const client = new ComputeManagementClient(this.credential, subscriptionId);
+
+    const result = [];
+    for await (const item of client.virtualMachines.listAll()) {
+      result.push(item);
     }
+
+    return result;
   }
 }
 

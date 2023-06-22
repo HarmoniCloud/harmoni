@@ -8,15 +8,15 @@ export class AzureProvider extends Provider {
 
   constructor() {
     super(ProviderEnum.AZURE);
-
-    // TODO: Need to get AZURE_TENANT_ID, AZURE_CLIENT_ID, AZURE_CLIENT_SECRET from env
-    // Waiting for @slagter to create an Azure AD app for this purpose
     this.credential = new DefaultAzureCredential();
   }
 
   async getResources(subscriptionId: string) {
     const client = new ResourceManagementClient(this.credential, subscriptionId);
-    const resources = client.resources.list();
-    return resources;
+    const resArray = [];
+    for await (const item of client.providers.list()) {
+      resArray.push(item);
+    }
+    return resArray;
   }
 }

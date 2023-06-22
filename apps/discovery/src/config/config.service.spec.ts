@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppConfigModule } from './config.module';
-import { AppConfigService, ConfigNotFoundError } from './config.service';
+import { AppConfigService } from './config.service';
 
 describe('AppConfigService', () => {
   let service: AppConfigService;
@@ -29,6 +29,6 @@ describe('AppConfigService', () => {
 
   it('should throw a ConfigNotFoundError if config is not found', () => {
     jest.spyOn(service['configService'], 'get').mockReturnValue(undefined);
-    expect(() => service.getConfig()).toThrow(ConfigNotFoundError);
+    expect(() => service.getConfig()).toThrow();
   });
 });

@@ -1,0 +1,8 @@
+{
+  "name": "@harmoni/logger",
+  "version": "0.0.1",
+  "type": "commonjs",
+  "dependencies": {
+    "@origranot/ts-logger": "^1.12.0"
+  }
+}

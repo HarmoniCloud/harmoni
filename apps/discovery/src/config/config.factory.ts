@@ -1,5 +1,4 @@
 import { ConfigFactory } from '@nestjs/config';
-import { LOG_LEVEL } from '@origranot/ts-logger';
 
 export const configFactory: ConfigFactory<{ config: Configuration }> = () => {
   return {
@@ -7,11 +6,6 @@ export const configFactory: ConfigFactory<{ config: Configuration }> = () => {
       app: {
         port: +process.env.APP_PORT || 3000,
         env: process.env.NODE_ENV || 'development',
-      },
-      logger: {
-        console: {
-          threshold: LOG_LEVEL[process.env.LOGGER_CONSOLE_THRESHOLD] || LOG_LEVEL.INFO,
-        },
       },
       azure: {
         clientId: process.env.AZURE_CLIENT_ID,
@@ -28,12 +22,6 @@ export interface AppConfig {
   env: string;
 }
 
-export interface LoggerConfig {
-  console: {
-    threshold: LOG_LEVEL;
-  };
-}
-
 export interface AzureConfig {
   clientId: string;
   clientSecret: string;
@@ -43,6 +31,5 @@ export interface AzureConfig {
 
 export interface Configuration {
   app: AppConfig;
-  logger: LoggerConfig;
   azure: AzureConfig;
 }

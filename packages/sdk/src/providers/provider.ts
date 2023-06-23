@@ -4,4 +4,6 @@ export abstract class Provider {
   getName(): string {
     return this.name;
   }
+
+  abstract init(): void | Promise<void>;
 }

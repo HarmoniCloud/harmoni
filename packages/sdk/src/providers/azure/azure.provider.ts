@@ -1,29 +1,28 @@
 import { Provider } from '../provider';
 import { Provider as ProviderEnum } from '@harmoni/types';
 import { ClientSecretCredential, ClientSecretCredentialOptions } from '@azure/identity';
-import { logger } from '@harmoni/logger';
 import { ComputeManagementClient } from '@azure/arm-compute';
+import { AzureVirtualMachine } from './models/virtual-machine';
+import { AzureComputeService } from './services/compute.service';
 
 export class AzureProvider extends Provider {
-  private readonly credential: ClientSecretCredential;
+  private credential!: ClientSecretCredential;
+  private azureComputeService!: AzureComputeService;
 
-  constructor(providerOptions: AzureProviderOptions) {
+  constructor(private readonly providerOptions: AzureProviderOptions) {
     super(ProviderEnum.AZURE);
-
-    const { tenantId, clientId, clientSecret, options } = providerOptions;
-    this.credential = new ClientSecretCredential(tenantId, clientId, clientSecret, options);
+    this.init();
   }
 
-  async getResources(subscriptionId: string) {
-    logger.info(`Getting resources for subscription ${subscriptionId}`);
-    const client = new ComputeManagementClient(this.credential, subscriptionId);
+  init(): void | Promise<void> {
+    const { tenantId, clientId, clientSecret, options } = this.providerOptions;
+    this.credential = new ClientSecretCredential(tenantId, clientId, clientSecret, options);
 
-    const result = [];
-    for await (const item of client.virtualMachines.listAll()) {
-      result.push(item);
-    }
+    this.azureComputeService = new AzureComputeService(this.credential);
+  }
 
-    return result;
+  getAllVms(subscriptionId: string): Promise<AzureVirtualMachine[]> {
+    return this.azureComputeService.getAllVirtualMachines(subscriptionId);
   }
 }
 

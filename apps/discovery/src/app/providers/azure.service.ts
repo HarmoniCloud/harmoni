@@ -12,6 +12,6 @@ export class AzureService {
   }
 
   async getResources(subscriptionId: string) {
-    return this.client.getResources(subscriptionId);
+    return this.client.getAllVms(subscriptionId);
   }
 }

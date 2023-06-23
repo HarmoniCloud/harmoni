@@ -5,4 +5,8 @@ export class AwsProvider extends Provider {
   constructor() {
     super(ProviderEnum.AWS);
   }
+
+  override init(): void | Promise<void> {
+    throw new Error('Method not implemented.');
+  }
 }

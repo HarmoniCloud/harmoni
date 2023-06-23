@@ -1,12 +1,8 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { AppConfigModule } from '../config/config.module';
-import { AzureService } from './providers/azure.service';
+import { ProviderModule } from '../provider/provider.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
-  imports: [AppConfigModule],
-  controllers: [AppController],
-  providers: [AppService, AzureService],
+  imports: [ScheduleModule.forRoot(), ProviderModule],
 })
 export class AppModule {}

@@ -9,7 +9,7 @@
       "runtimeArgs": ["--require", "ts-node/register", "--require", "tsconfig-paths/register"],
       "cwd": "${workspaceRoot}",
       "internalConsoleOptions": "openOnSessionStart",
-      "envFile": "${workspaceRoot}/apps/discovery/.env",
+      "envFile": "${workspaceRoot}/.env",
       "env": {
         "TS_NODE_PROJECT": "apps/discovery/tsconfig.app.json" // Specify the tsconfig to use
       },
